@@ -30,7 +30,7 @@ export default function RootLayout({
           <Link href="/">
           <div className="text-2xl px-3x">FUTSALKEUN</div>
           </Link>
-          <div className="mt-0 md:mt-2">
+          <div className="mt-0 text-center md:mt-2">
           <nav className="flex flex-row gap-6">
             <Link href="/">HOME</Link>  
   
@@ -57,7 +57,7 @@ export default function RootLayout({
               <p className="text-sm text-justify w-[300]">Tempat terbaik untuk menemukan perlengkapan futsal</p>
             </div>
             <div className="mt-4 md:mt-0">
-              <h1 className="text-xl font-semibold">Jelajahi</h1>
+              <h1 className="text-xl font-semibold mb-3">Jelajahi</h1>
               <div className="flex flex-row flex-nowrap gap-3 md:flex-col text-center">
               <Link href="sepatu" className="hover:underline">SEPATU</Link>
               <Link href="jersey" className="hover:underline">JERSEY</Link>
@@ -70,9 +70,9 @@ export default function RootLayout({
             <div className="mt-4 md:mt-0">
               <h1 className="text-xl font-semibold">Ikuti Sosial Media kami</h1>
 
-                <div className="flex flex-row gap-5 mt-4">
+                <div className="flex flex-row gap-5 mt-3">
 
-              <a href="https://www.facebook.com/share/18EVGDr9br">
+              <a href="https://www.facebook.com/profile.php?id=61584050512831"> 
               <Image
               src="/facebook-circle-line.svg"
               alt="facebook"
@@ -81,7 +81,7 @@ export default function RootLayout({
               />
               </a>     
 
-              <a href="https://www.instagram.com/azrilllmuhammad?igsh=dXZhdXhjZmZpNXh0">
+              <a href="https://www.instagram.com/futsalkeun_id">
               <Image
               src="/instagram-line.svg"
               alt="instagram"
@@ -90,7 +90,7 @@ export default function RootLayout({
               />
               </a>
 
-              <a href="https://www.instagram.com/azrilllmuhammad?igsh=dXZhdXhjZmZpNXh0">
+              <a href="https://x.com/flwchart?t=pZnwEH1kWKzjgkAL8R54QQ&s=09">
               <Image
               src="/twitter-x-line.svg"
               alt="instagram"
@@ -104,12 +104,12 @@ export default function RootLayout({
                   <h1 className="text-xl font-semibold">Hubungi Kami</h1>
                   <div className="flex flex-row gap-2 mt-2">
                                   <h3>Email :</h3>
-                                  <a href="mailto:azril3121@email.com">
+                                  <a href="mailto:futsalkeun1428@email.com">
                                   <h3 className="hover:underline">futsalkeun1428@gmail.com</h3>               
                                    </a>
                                   </div>
                   
-                                  <div className="flex flex-row gap-2 mt-2">
+                                  <div className="flex flex-row gap-2 mt-2">  
                                   <h3>WhatsApp :</h3>
                                   <a href="https://wa.me/62895397432051">
                                   <h3 className="hover:underline">+62 895-3974-32051</h3>
@@ -119,7 +119,7 @@ export default function RootLayout({
             </div>
             
             <div className="mt-4 md:mt-0">
-              <h1 className="text-xl font-semibold">Lokasi</h1>
+              <h1 className="text-xl font-semibold mb-3">Lokasi</h1>
               <p>Jl.Terusan Pasir Koja</p>
             </div>
           </div>

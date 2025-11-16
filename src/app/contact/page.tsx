@@ -21,7 +21,7 @@ export default function Contact() {
                 width = {30}
                 height = {30}
                 />
-                <a href="https://www.instagram.com/azrilllmuhammad?igsh=dXZhdXhjZmZpNXh0">
+                <a href="https://www.instagram.com/futsalkeun_id">
                 <h3 className="hover:underline">@futsalkeun_id</h3>
                 </a>
                 </div>
@@ -33,19 +33,19 @@ export default function Contact() {
                 width = {30}
                 height = {30}
                 />
-                <a href="https://www.facebook.com/share/18EVGDr9br">
+                <a href="https://www.facebook.com/profile.php?id=61584050512831">
                 <h3 className="hover:underline">Futsalkeun</h3>
                 </a>
                 </div>
 
                 <div className=" flex flex-row gap-4">
                 <Image 
-                src = "/twitter-x-hitam.svg"
+                src = "/twitter-hitam-line.svg"
                 alt = "twitter"
                 width = {30}
                 height = {30}
                 />
-                <a href="https://www.facebook.com/share/18EVGDr9br">
+                <a href="https://x.com/flwchart?t=pZnwEH1kWKzjgkAL8R54QQ&s=09">
                 <h3 className="hover:underline">Futsalkeun</h3>
                 </a>
                 </div>
@@ -57,7 +57,7 @@ export default function Contact() {
                 width = {30}
                 height = {30}
                 />
-                <a href="mailto:azril3121@email.com">
+                <a href="mailto:futsalkeun1428@email.com">
                 <h3 className="hover:underline">futsalkeun1428@gmail.com</h3>               
                  </a>
                 </div>
@@ -93,10 +93,10 @@ export default function Contact() {
             </div>
 
             <Image className="rounded mx-auto mb-10 shadow-xl/30 "
-            src="/imagess.jpeg"
+            src="/contact.png"
             alt="Contact"
-            width={500}
-            height={500}                                     
+            width={400}
+            height={300}                                     
             />
         </div>
         
