@@ -87,9 +87,9 @@ export default function Home() {
             />
             </div>
 
-             <div className="relative h-100 mt-10 mb-10">
+             <div className="relative h-90 mt-10 mb-10">
             <Image 
-                src="/jerseytim.jpg"
+                src="/jerseyicon.png"
                 alt="Home2"              
                 fill
                 className="object-cover"

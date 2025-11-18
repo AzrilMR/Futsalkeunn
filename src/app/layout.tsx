@@ -30,7 +30,7 @@ export default function RootLayout({
           <Link href="/">
           <div className="text-2xl px-3x">FUTSALKEUN</div>
           </Link>
-          <div className="mt-0 text-center md:mt-2">
+          <div className="mt-0 flex justify-center md:mt-2">
           <nav className="flex flex-row gap-6">
             <Link href="/">HOME</Link>  
   
