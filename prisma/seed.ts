@@ -10,8 +10,7 @@ async function main() {
     console.log('Membersihkan data admin lama')
     await prisma.admin.deleteMany()
 
-    // Buat admin default
-    console.log('👤 Membuat admin user...')
+    console.log('Membuat admin user')
     const hashedPassword = await bcrypt.hash('admin123', 12)
     
     await prisma.admin.create({
