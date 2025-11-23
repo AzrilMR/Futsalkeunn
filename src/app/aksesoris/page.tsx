@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import Layout from "@/components/layout";
 
 export default function Aksesoris() {
     return(
+        <Layout>
         <div>
             <div className="relative h-80">
                         <Image 
@@ -70,5 +72,6 @@ export default function Aksesoris() {
                            
 
         </div>
+        </Layout>
     );
 };

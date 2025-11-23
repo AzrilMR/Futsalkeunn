@@ -19,7 +19,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id:s
     }
 }
 
-export async function POST(request: Request, { params }: { params: Promise<{ id:string }> }) {
+export async function PUT(request: Request, { params }: { params: Promise<{ id:string }> }) {
     try {
         if (!(await isAdminAuthenticated())) {
             return NextResponse.json({ error: 'Tidak memiliki akses' }, { status: 401 })

@@ -12,10 +12,17 @@ interface Jersey {
 
 export default function KelolaJersey() {
   const [jersey, setJersey] = useState<Jersey[]>([])
-  const [formData, setFormData] = useState<Partial<Jersey>>({})
+  const [formData, setFormData] = useState<Partial<Jersey>>({
+      nama_jersey: '',
+      uk_jersey: '',
+      deskripsi_jersey: '',
+      harga_jersey: 0,
+      gambar_jersey: ''
+  })
   const [editingId, setEditingId] = useState<number | null>(null)
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
+  const [uploading, setUploading] = useState(false)
 
   useEffect(() => {
     fetchJersey()
@@ -30,6 +37,14 @@ export default function KelolaJersey() {
       setMessage('Gagal mengambil data jersey')
     }
   }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const { name, value } = e.target
+  setFormData(prev => ({
+    ...prev,
+    [name]: name === 'harga_jersey' ? parseInt(value) || 0 : value
+  }))
+}
 
   const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault()
@@ -87,10 +102,71 @@ export default function KelolaJersey() {
         setMessage('Network error')
       }
     }
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files?.[0]
+  if (!file) return
+
+  setUploading(true)
+  setMessage('')
+
+  try {
+    if (!file.type.startsWith('image/')) {
+      throw new Error('Hanya file gambar yang diizinkan')
+    }
+
+    if (file.size > 1 * 1024 * 1024) {
+      throw new Error('Ukuran file maksimal 1MB')
+    }
+
+    const uploadFormData = new FormData()
+    uploadFormData.append('file', file)
+
+    const response = await fetch('/api/admin/upload', {
+      method: 'POST',
+      body: uploadFormData
+    })
+
+    if (!response.ok) {
+      throw new Error(`Upload gagal: ${response.status}`)
+    }
+
+    const result = await response.json()
+
+    if (result.success && result.fileUrl) {
+      setFormData(prev => ({
+        ...prev,                    
+        gambar_jersey: result.fileUrl 
+      }))
+      
+      setMessage('Gambar berhasil diupload')
+    } else {
+      throw new Error(result.error || 'Upload gambar gagal')
+    }
+
+  } catch (error) {
+    console.error('Upload error:', error)
+    if (error instanceof Error) {
+      setMessage(error.message || 'Terjadi kesalahan saat upload')
+    } else {
+      setMessage('Terjadi kesalahan saat upload')
+    }
+  } finally {
+    setUploading(false)
+  }
+}
+
   
     const resetForm = () => {
-      setFormData({})
+      setFormData({
+        nama_jersey: '',
+        uk_jersey: '',
+        deskripsi_jersey: '',
+        harga_jersey: 0,
+        gambar_jersey: ''
+      })
       setEditingId(null)
+      setMessage('')
     }
   
     const formatCurrency = (amount: number) => {
@@ -100,6 +176,7 @@ export default function KelolaJersey() {
         minimumFractionDigits: 0
       }).format(amount)
     }
+
 
 return (
     <div>
@@ -113,60 +190,93 @@ return (
         </div>
       )}
       
-      <form onSubmit={handleSubmit} className="bg-gray-50 p-4 rounded mb-6 border">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <input
-            type="text"
-            placeholder="Nama Jersey"
-            value={formData.nama_jersey || ''}
-            onChange={(e) => setFormData({...formData, nama_jersey: e.target.value})}
-            className="p-2 border rounded"
-            required
-          />
-          <input
-            type="text"
-            placeholder="Ukuran"
-            value={formData.uk_jersey || ''}
-            onChange={(e) => setFormData({...formData, uk_jersey: e.target.value})}
-            className="p-2 border rounded"
-          />
-          <input
-            type="number"
-            placeholder="Harga"
-            value={formData.harga_jersey || ''}
-            onChange={(e) => setFormData({...formData, harga_jersey: parseInt(e.target.value)})}
-            className="p-2 border rounded"
-            required
-          />
-        </div>
+<form onSubmit={handleSubmit} className="bg-gray-50 p-4 rounded mb-6 border">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+    <input
+      type="text"
+      name="nama_jersey"
+      placeholder="Nama Jersey"
+      value={formData.nama_jersey || ''}
+      onChange={handleChange} 
+      className="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#204B57]"
+      required
+    />
+    <input
+      type="text"
+      name="uk_jersey" 
+      placeholder="Ukuran"
+      value={formData.uk_jersey || ''}
+      onChange={handleChange}
+      className="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#204B57]"
+    />
+    <input
+      type="number"
+      name="harga_jersey" 
+      placeholder="Harga"
+      value={formData.harga_jersey || ''}
+      onChange={handleChange} 
+      className="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#204B57]"
+      required
+    />
+
+    <div className="md:col-span-2">
+      <label className="block text-sm font-medium mb-2 text-gray-700">
+        Upload Gambar Jersey
+      </label>
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleImageUpload}
+        className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#204B57]"
+        disabled={uploading}
+      />
+      {uploading && (
+        <p className="text-blue-600 text-sm mt-1">Mengupload gambar...</p>
+      )}
+    </div>
+  </div>
+
+  <textarea
+    name="deskripsi_jersey" 
+    placeholder="Deskripsi jersey..."
+    value={formData.deskripsi_jersey || ''}
+    onChange={handleChange}
+    className="w-full p-2 border rounded mb-4 focus:outline-none focus:ring-2 focus:ring-[#204B57]"
+    rows={3}
+  />
+
+  {formData.gambar_jersey && (
+    <div className="mt-3 mb-4 p-3 bg-green-50 rounded border border-green-200">
+      <p className="text-sm text-green-700 font-medium mb-2">Preview Gambar:</p>
+      <img 
+        src={formData.gambar_jersey} 
+        alt="Preview Jersey" 
+        className="w-32 h-32 object-cover rounded border shadow-sm"
+      />
+    </div>
+  )}
+
+  <div className="flex gap-2">
+    <button 
+      type="submit" 
+      className="bg-[#204B57] text-white px-4 py-2 rounded hover:bg-[#16333A] disabled:opacity-50 transition-colors" 
+      disabled={loading || uploading}
+    >
+      {loading ? 'Processing...' : (editingId ? 'Update' : 'Tambah')} Jersey
+    </button>
+    {editingId && (
+      <button 
+        type="button" 
+        onClick={resetForm} 
+        className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition-colors"
+      >
+        Cancel
+      </button>
+    )}
+  </div>
+</form>
+
         
-        <textarea
-          placeholder="Deskripsi"
-          value={formData.deskripsi_jersey || ''}
-          onChange={(e) => setFormData({...formData, deskripsi_jersey: e.target.value})}
-          className="w-full p-2 border rounded mb-4"
-          rows={3}
-        />
-        
-        <input
-          type="text"
-          placeholder="URL Gambar"
-          value={formData.gambar_jersey || ''}
-          onChange={(e) => setFormData({...formData, gambar_jersey: e.target.value})}
-          className="w-full p-2 border rounded mb-4"
-        />
-        
-        <div className="flex gap-2">
-          <button type="submit" className="bg-[#204B57] text-white px-4 py-2 rounded hover:bg-[#16333A] disabled:opacity-50" disabled={loading}>
-            {loading ? 'Processing...' : (editingId ? 'Update' : 'Tambah')} Jersey
-          </button>
-          {editingId && (
-            <button type="button" onClick={resetForm} className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
-              Cancel
-            </button>
-          )}
-        </div>
-      </form>
 
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white border">
@@ -185,7 +295,17 @@ return (
                 <td className="py-2 px-4 border-b">{item.nama_jersey}</td>
                 <td className="py-2 px-4 border-b">{item.uk_jersey}</td>
                 <td className="py-2 px-4 border-b">{formatCurrency(item.harga_jersey)}</td>
-                <td className="py-2 px-4 border-b"></td>
+               <td className="py-3 px-4 border-b">
+                {item.gambar_jersey ? (
+                  <img 
+                    src={item.gambar_jersey} 
+                    alt={item.nama_jersey}
+                    className="w-16 h-16 object-cover mx-auto"
+                  />
+                ) : (
+                  <span className="text-gray-400 text-sm">No image</span>
+                )}
+                </td>
                 <td className="py-2 px-4 border-b">
                   <button
                     onClick={() => handleEdit(item)}

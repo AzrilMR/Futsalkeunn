@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { isAdminAuthenticated } from '@/lib/session'
 
-export async function GET(request: Request, { params }: { params: Promise<{ id:string }> }) {
+export async function GET(request: Request, { params }: { params: Promise<{ id:string }> }) {    
     try {
         const { id } = await params;
         const sepatu = await prisma.sepatu.findUnique({
@@ -19,7 +19,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id:s
     }
 }
 
-export async function POST(request: Request, { params }: { params: Promise<{ id:string }> }) {
+export async function PUT(request: Request, { params }: { params: Promise<{ id:string }> }) {
     try {
         if (!(await isAdminAuthenticated())) {
             return NextResponse.json({ error: 'Tidak memiliki akses' }, { status: 401 })

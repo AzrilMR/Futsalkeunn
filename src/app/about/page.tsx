@@ -1,7 +1,9 @@
 import Image from "next/image";
+import Layout from "@/components/layout";
 
 export default function About() {
     return (
+        <Layout>
         <div className="max-w-7xl mx-auto px-6 py-12">
             <h1 className="text-4xl text-left font-bold mb-8 md:text-center">Tentang Kami</h1>      
 
@@ -72,5 +74,6 @@ export default function About() {
                 </div>
             </div>
         </div>
+        </Layout>
     );
 };              

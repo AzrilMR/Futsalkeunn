@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import Layout from "@/components/layout";
 
 export default function Jersey() {
     return(
+        <Layout>
         <div>
             <div className="relative h-80">
                         <Image 
@@ -68,5 +70,6 @@ export default function Jersey() {
                                                </div>
                         
         </div>
+        </Layout>
     );
 };
