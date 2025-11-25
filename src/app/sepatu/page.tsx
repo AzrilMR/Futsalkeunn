@@ -7,7 +7,7 @@ export default function Home() {
     return(
         <Layout>
         <div>
-            <div className="relative h-80">
+            <div className="relative h-120">
             <Image 
                 src="/pxfuel.jpg"
                 alt="sepatu"

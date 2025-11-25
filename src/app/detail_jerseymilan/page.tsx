@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import Layout from "@/components/layout";
 
 export default function Detail(){
     return(
+        <Layout>
         <div className="flex flex-col gap-10 md:flex-row md:gap-5">
              <div className="flex justify-center">
                 <Image
@@ -42,5 +44,6 @@ export default function Detail(){
             </div>
             </div>
         </div>
+        </Layout>
     );
 };

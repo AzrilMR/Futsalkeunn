@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     const timestamp = Date.now()
     const random = Math.random().toString(36).substring(2, 8)
     const extension = file.name.split('.').pop()
-    const filename = `jersey-${timestamp}-${random}.${extension}`
+    const filename = `Item-${timestamp}-${random}.${extension}`
     
     const filePath = join(uploadsDir, filename)
     const bytes = await file.arrayBuffer()

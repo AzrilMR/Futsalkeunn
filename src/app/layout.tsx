@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Graduate } from "next/font/google";
 import "./globals.css";
-import Link from "next/link";
-import Image from "next/image"
 
 const fontsGraduate = Graduate({
   variable: "--font-graduate",

@@ -6,7 +6,7 @@ export default function Aksesoris() {
     return(
         <Layout>
         <div>
-            <div className="relative h-80">
+            <div className="relative h-120">
                         <Image 
                             src="/aksesoris.jpeg"
                             alt="aksesoris"

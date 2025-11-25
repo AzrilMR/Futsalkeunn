@@ -7,7 +7,7 @@ export default function Home() {
     return(
         <Layout>
         <div>
-            <div className="relative h-80">
+            <div className="relative h-120">
             <Image 
                 src="/home.jpg"
                 alt="Home"              
@@ -15,79 +15,53 @@ export default function Home() {
                 className="object-cover"
             />
             </div>
-            <h1 className="m-8 p-5 bg-[#204B57] w text-white text-4xl rounded text-center">Rekomendasi Dari Kami</h1>
-            
-            <div className="flex flex-row justify-center items-center flex-wrap">
+            <h1 className="text-4xl font-bold mt-20 px-4">Lihat koleksi perlengkapan futsal dari kami</h1> 
 
-            <Image className="rounded px-4"
-            src="/high (3).png"
-            alt="high"
-            width={500}
-            height={300}
-            />
-            <Link href="/detail_ortuslyberte">
-            <div className="m-8 p-5 bg-[#FAFAFA] shadow-lg w-[250] h-[310] rounded-xl hover:bg-gray-200">
-                <Image className="rotate-14 m-5 " 
-                    src="/catalystliberte_v4_in.png"
-                    alt="sepatu1"
-                    width={150}
-                    height={100}
-                />
-                <h3>ORTUSEIGHT-CATALYST LIBERTE V4</h3>
-                <p className="text-xs">Navy</p>
-                <p>RP.649,000.00</p>
-            </div>
-            </Link>
+            <div className="flex flex-row justify-center items-center flex-wrap mt-20 ">
 
-            <Link href="/detail_specsessorer">
-            <div className="m-8 p-6 bg-[#FAFAFA] shadow-lg w-[250] h-[310] rounded-xl hover:bg-gray-200">
-                <Image className="rotate-14 m-5" 
-                    src="/SPECS_ESSORER_INDESSERT_FLOWER.png"
-                    alt="sepatu4"
-                    width={150}
-                    height={100}
+            <div className="relative w-fit">
+                <Image className="rounded px-4"
+                    src="/high (3).png"
+                    alt="high"
+                    width={400}
+                    height={300}
                 />
-                <h3>SPECS-ESSORER IN DESSERT FLOWER</h3>
-                <p className="text-xs">Pink</p>
-                <p>RP.299,550.00</p>
-            </div>
-            </Link>
+                <Link href="/sepatu">
+                <button className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white hover:bg-white-200 p-3 rounded-full">
+                    Lihat sekarang
+                </button>
+                </Link>
+            </div>         
+  
 
-    
-            <Link href="/detail_ortusjogosala">
-            <div className="m-8 p-5 bg-[#FAFAFA] shadow-lg w-[250] h-[310] rounded-xl hover:bg-gray-200">
-                <Image className="rotate-14 m-5" 
-                    src="/JOGOSALA_VANQUISh_GREY.png"
-                    alt="sepatu3"
-                    width={150}
-                    height={100}
+            <div className="relative w-fit">
+                <Image className="rounded px-4"
+                    src="/high (2).png"
+                    alt="high"
+                    width={400}
+                    height={300}
                 />
-                <h3>ORTUSEIGHT-JOGOSALA VANQUISH</h3>
-                <p className="text-xs">Abu-abu</p>
-                <p>RP.399,000.00</p>
+                <Link href="/jersey">
+                <button className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white hover:bg-white-200 p-3 rounded-full">
+                    Lihat sekarang
+                </button>
+                </Link>
             </div>
-            </Link>
 
-            <Link href="/detail_specsreacto">
-             <div className="m-8 p-6 bg-[#FAFAFA] shadow-lg w-[250] h-[310] rounded-xl hover:bg-gray-200">
-                <Image className="rotate-14 m-5" 
-                    src="/SPECS_REACTO_DEVIANT_PRO_IN.png"
-                    alt="sepatu2"
-                    width={150}
-                    height={100}
+            <div className="relative w-fit">
+                <Image className="rounded px-4"
+                    src="/high (3).png"
+                    alt="high"
+                    width={400}
+                    height={300}
                 />
-                <h3>SPECS-REACTO DEVIANT IN</h3>
-                <p className="text-xs">Putih</p>
-                <p>RP.499,000.00</p>
+                <Link href="/aksesoris">
+                <button className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white hover:bg-white-200 p-3 rounded-full">
+                    Lihat sekarang
+                </button>
+                </Link>
             </div>
-            </Link>
-            <Image className="rounded px-4"
-            src="/high (2).png"
-            alt="high2"
-            width={500}
-            height={300}
-            />
-            </div>
+            </div>            
 
              <div className="relative h-90 mt-10 mb-10">
             <Image 
