@@ -12,9 +12,9 @@ export async function POST(request: Request) {
 
     const result = await verifyAdmin(username, password)
     
-    if (result.succes && result.admin) {
+    if (result.success && result.admin) {
       await createAdminSession(result.admin.id)
-      return NextResponse.json({ succes: true })
+      return NextResponse.json({ success: true })
     } else {
       return NextResponse.json({ error: 'Username atau password salah' }, { status: 401 })
     }
