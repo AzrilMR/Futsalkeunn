@@ -1,19 +1,19 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { getAdminSession } from '@/lib/session';
 
-export async function middleware (request: NextRequest) {
-    const adminId = await getAdminSession();
+export function middleware(request: NextRequest) {
+  const adminSession = request.cookies.get('admin-session')?.value;
 
-     if (request.nextUrl.pathname.startsWith('/admin') && 
-      !request.nextUrl.pathname.includes('/login') && 
-      !adminId) {
-    return NextResponse.redirect(new URL('/admin/login', request.url))
+  const isAdminRoute = request.nextUrl.pathname.startsWith('/admin');
+  const isLoginRoute = request.nextUrl.pathname.includes('/login');
+
+  if (isAdminRoute && !isLoginRoute && !adminSession) {
+    return NextResponse.redirect(new URL('/admin/login', request.url));
   }
 
-  return NextResponse.next()
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/admin/:path*']
-}
+  matcher: ['/admin/:path*'],
+};
