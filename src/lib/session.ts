@@ -1,6 +1,3 @@
-'use server'
-import { cookies } from 'next/headers'
-
 import { NextResponse } from "next/server";
 
 export function createAdminSession(adminId: number) {
@@ -17,24 +14,22 @@ export function createAdminSession(adminId: number) {
   return res;
 }
 
+export function deleteAdminSession() {
+  const res = NextResponse.json({ success: true });
 
-export async function deleteAdminSession() {
-  const cookieStore = await cookies()
-  cookieStore.delete('admin-session')
+  res.cookies.set("admin-session", "", {
+    path: "/",
+    maxAge: 0,
+  });
+
+  return res;
 }
 
-export async function getAdminSession(): Promise<number | null> {
-  const cookieStore = await cookies()
-  const sessionCookie = cookieStore.get('admin-session')
-  
-  if (!sessionCookie?.value) {
-    return null
-  }
+export function getAdminSession(request: Request): number | null {
+  const cookie = request.headers.get("cookie") || "";
+  const match = cookie.match(/admin-session=(\d+)/);
 
-  return parseInt(sessionCookie.value)
-}
+  if (!match) return null;
 
-export async function isAdminAuthenticated(): Promise<boolean> {
-  const adminId = await getAdminSession()
-  return adminId !== null
+  return Number(match[1]);
 }
