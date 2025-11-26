@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { isAdminAuthenticated } from '@/lib/session'
 
 export async function GET() {
   try {
@@ -13,14 +12,10 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    if (!(await isAdminAuthenticated())) {
-      return NextResponse.json({ error: 'Gagal menambahkan sepatu' }, { status: 401 })
-    }
-
     const data = await request.json()
     
     if (!data.nama_sepatu || !data.harga_sepatu) {
-      return NextResponse.json({ error: 'Nama and harga are required' }, { status: 400 })
+      return NextResponse.json({ error: 'Nama dan harga wajib diisi' }, { status: 400 })
     }
 
     const sepatu = await prisma.sepatu.create({ data })

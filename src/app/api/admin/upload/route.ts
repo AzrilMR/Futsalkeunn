@@ -1,49 +1,35 @@
-import { NextResponse } from 'next/server'
-import { writeFile, mkdir } from 'fs/promises'
-import { join } from 'path'
-import { isAdminAuthenticated } from '@/lib/session'
+import { NextResponse } from "next/server";
+import { put } from "@vercel/blob";
 
-export async function POST(request: Request) {
+export async function POST(req: Request) {
   try {
-    if (!(await isAdminAuthenticated())) {
-      return NextResponse.json({ error: 'Tidak memiliki akses' }, { status: 401 })
-    }
-
-    const formData = await request.formData()
-    const file = formData.get('file') as File
+    const formData = await req.formData();
+    const file = formData.get("file") as File;
 
     if (!file) {
-      return NextResponse.json({ error: 'File tidak ditemukan' }, { status: 400 })
+      return NextResponse.json({ error: "File tidak ditemukan" }, { status: 400 });
     }
 
-    if (!file.type.startsWith('image/')) {
-      return NextResponse.json({ error: 'Hanya bisa mengupload image!' }, { status: 400 })
+    if (!file.type.startsWith("image/")) {
+      return NextResponse.json({ error: "Hanya bisa upload image!" }, { status: 400 });
     }
 
-    const uploadsDir = join(process.cwd(), 'public', 'uploads')
-    await mkdir(uploadsDir, { recursive: true })
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
 
-    const timestamp = Date.now()
-    const random = Math.random().toString(36).substring(2, 8)
-    const extension = file.name.split('.').pop()
-    const filename = `Item-${timestamp}-${random}.${extension}`
-    
-    const filePath = join(uploadsDir, filename)
-    const bytes = await file.arrayBuffer()
-    const buffer = Buffer.from(bytes)
-    await writeFile(filePath, buffer)
-    
-    const fileUrl = `/uploads/${filename}`
+    const fileName = `${Date.now()}-${file.name}`;
 
-    return NextResponse.json({ 
-      success: true, 
-      fileUrl 
-    })
+    const blob = await put(`uploads/${fileName}`, buffer, {
+      access: "public",
+    });
+
+    return NextResponse.json({
+      success: true,
+      url: blob.url,
+    });
+
   } catch (error) {
-    console.error('Upload error:', error)
-    return NextResponse.json(
-      { error: 'Gagal mengupload file' },
-      { status: 500 }
-    )
+    console.error("Upload error:", error);
+    return NextResponse.json({ error: "Gagal upload file" }, { status: 500 });
   }
 }
