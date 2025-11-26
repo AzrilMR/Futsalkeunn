@@ -2,151 +2,92 @@ import Image from "next/image";
 import Link from "next/link";
 import Layout from "@/components/layout";
 
-export default function Home() {
+interface Sepatu {
+  id_sepatu: number
+  nama_sepatu: string
+  warna_sepatu: string
+  uk_sepatu: string
+  deskripsi_sepatu: string
+  harga_sepatu: number
+  gambar_sepatu: string
+}
 
-    return(
-        <Layout>
-        <div>
-            <div className="relative h-120">
-            <Image 
-                src="/pxfuel.jpg"
-                alt="sepatu"
-                fill
-                className="object-cover"
-            />
-            </div>
+async function getSepatu(): Promise<Sepatu[]> {
+  try {
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/public/sepatu`, {
+      cache: 'no-store'
+    })
+    
+    if (!res.ok) {
+      throw new Error('Failed to fetch sepatu')
+    }
+    
+    const data = await res.json()
+    return data.data || []
+  } catch (error) {
+    console.error('Error fetching sepatu:', error)
+    return []
+  }
+}
 
-            <div className="flex flex-row justify-center flex-wrap">
-                    <Link href="/detail_ortuslyberte">
-                       <div className="m-8 p-5 bg-[#FAFAFA] shadow-lg w-[250] h-[310] rounded-xl hover:bg-gray-200">
-                           <Image className="rotate-14 m-5" 
-                               src="/catalystliberte_v4_in.png"
-                               alt="sepatu1"
-                               width={150}
-                               height={100}
-                           />
-                           <h3>ORTUSEIGHT-CATALYST LIBERTE V4</h3>
-                           <p className="text-xs">Navy</p>
-                           <p>RP.649,000.00</p>
-                       </div>
-                    </Link>
+export default async function SepatuPage() {
+  const sepatu = await getSepatu()
 
-                    <Link href="/detail_ortusjogorampage">
-                        <div className="m-8 p-6 bg-[#FAFAFA] shadow-lg w-[250] h-[310] rounded-xl hover:bg-gray-200">
-                           <Image className="rotate-14 m-5" 
-                               src="/jogosala rampage v3 biru.png"
-                               alt="sepatu2"
-                               width={150}
-                               height={100}
-                           />
-                           <h3>ORTUSEIGHT-JOGOSALA RAMPAGE V3</h3>
-                           <p className="text-xs">Biru</p>
-                           <p>RP.499,000.00</p>
-                       </div>
-                    </Link>
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      minimumFractionDigits: 0
+    }).format(amount)
+  }
 
-                    <Link href="/detail_ortusjogosala">
-                       <div className="m-8 p-5 bg-[#FAFAFA] shadow-lg w-[250] h-[310] rounded-xl hover:bg-gray-200">
-                           <Image className="rotate-14 m-5" 
-                               src="/JOGOSALA_VANQUISh_GREY.png"
-                               alt="sepatu3"
-                               width={150}
-                               height={100}
-                           />
-                           <h3>ORTUSEIGHT-JOGOSALA VANQUISH</h3>
-                           <p className="text-xs">Abu-abu</p>
-                           <p>RP.399,000.00</p>
-                       </div>
-                    </Link>
-
-                    <Link href="/detail_ortuslegion">
-                       <div className="m-8 p-6 bg-[#FAFAFA] shadow-lg w-[250] h-[310] rounded-xl hover:bg-gray-200">
-                           <Image className="rotate-14 m-5" 
-                               src="/catalyst legion v5 aqua.png"
-                               alt="sepatu4"
-                               width={150}
-                               height={100}
-                           />
-                           <h3>ORTUSEIGHT-CATALYST LEGION V5</h3>
-                           <p className="text-xs">Aqua</p>
-                           <p>RP.299,550.00</p>
-                       </div>
-                       </Link>
-
-                       <Link href="/detail_ortussirius">
-                       <div className="m-8 p-6 bg-[#FAFAFA] shadow-lg w-[250] h-[310] rounded-xl hover:bg-gray-200">
-                           <Image className="rotate-14 m-5" 
-                               src="/ORTUS_SIRIUS_IN_.png"
-                               alt="sepatu4"
-                               width={150}
-                               height={100}
-                           />
-                           <h3>ORTUSEIGHT-SIRIUS IN</h3>
-                           <p className="text-xs">Hitam</p>
-                           <p>RP.299,550.00</p>
-                       </div>
-                       </Link>
-
-                       <Link href="/detail_specsviper">
-                       <div className="m-8 p-6 bg-[#FAFAFA] shadow-lg w-[250] h-[310] rounded-xl hover:bg-gray-200">
-                           <Image className="rotate-14 m-5" 
-                               src="/specs viper hitam.png"
-                               alt="sepatu4"
-                               width={150}
-                               height={100}
-                           />
-                           <h3>SPECS-VIPER</h3>
-                           <p className="text-xs">Hitam</p>
-                           <p>RP.299,550.00</p>
-                       </div>
-                       </Link>
-
-
-                       <Link href="/detail_specsardent">
-                       <div className="m-8 p-6 bg-[#FAFAFA] shadow-lg w-[250] h-[310] rounded-xl hover:bg-gray-200">
-                           <Image className="rotate-14 m-5" 
-                               src="/specs ardent in double putih.png"
-                               alt="sepatu4"
-                               width={150}
-                               height={100}
-                           />
-                           <h3>SPECS-ARDENT IN DOUBLE</h3>
-                           <p className="text-xs">Putih</p>
-                           <p>RP.299,550.00</p>
-                       </div>
-                         </Link>
-
-                        <Link href="/detail_specsessorer">
-                       <div className="m-8 p-6 bg-[#FAFAFA] shadow-lg w-[250] h-[310] rounded-xl hover:bg-gray-200">
-                           <Image className="rotate-14 m-5" 
-                               src="/SPECS_ESSORER_INDESSERT_FLOWER.png"
-                               alt="sepatu4"
-                               width={150}
-                               height={100}
-                           />
-                           <h3>SPECS-ESSORER IN DESSERT FLOWER</h3>
-                           <p className="text-xs">Pink</p>
-                           <p>RP.299,550.00</p>
-                       </div>
-                       </Link>
-
-                        <Link href="/detail_specsreacto">
-                       <div className="m-8 p-6 bg-[#FAFAFA] shadow-lg w-[250] h-[310] rounded-xl hover:bg-gray-200">
-                           <Image className="rotate-14 m-5" 
-                               src="/SPECS_REACTO_DEVIANT_PRO_IN.png"
-                               alt="sepatu4"
-                               width={150}
-                               height={100}
-                           />
-                           <h3>SPECS-REACTO DEVIANT PRO IN</h3>
-                           <p className="text-xs">Aqua</p>
-                           <p>RP.299,550.00</p>
-                       </div>
-                        </Link>
-
-                       </div>
-
+  return(
+    <Layout>
+      <div>
+        <div className="relative h-120">
+          <Image 
+            src="/pxfuel.jpg"
+            alt="sepatu"
+            fill
+            className="object-cover"
+          />
         </div>
-        </Layout>
-    );
-};                                  
+
+        <div className="flex flex-row justify-center flex-wrap">
+          {sepatu.length > 0 ? (
+            sepatu.map((item) => (
+              <Link key={item.id_sepatu} href={`/sepatu/${item.id_sepatu}`}>
+                <div className="m-8 p-5 bg-[#FAFAFA] shadow-lg w-[250] h-[310] rounded-xl hover:bg-gray-200">
+                  <div className="rotate-14 m-5 flex justify-center">
+                    {item.gambar_sepatu ? (
+                      <Image 
+                        src={item.gambar_sepatu}
+                        alt={item.nama_sepatu}
+                        width={150}
+                        height={100}
+                      />
+                    ) : (
+                      <div className="w-[150px] h-[100px] bg-gray-200 flex items-center justify-center">
+                        <span className="text-gray-400">No Image</span>
+                      </div>
+                    )}
+                  </div>
+                  <h3 className="font-semibold mt-4">{item.nama_sepatu}</h3>
+                  <p className="text-xs text-gray-600">{item.warna_sepatu}</p>
+                  <p className="text-green-600 font-bold mt-2">
+                    {formatCurrency(item.harga_sepatu)}
+                  </p>
+                </div>
+              </Link>
+            ))
+          ) : (
+            <div className="text-center py-12 w-full">
+              <h3 className="text-xl font-semibold text-gray-600 mb-2">No Sepatu Available</h3>
+              <p className="text-gray-500">Belum ada sepatu yang tersedia</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </Layout>
+  );
+}

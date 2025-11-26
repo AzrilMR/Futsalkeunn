@@ -25,7 +25,7 @@ export default function Detail(){
             <p className="text-xl bg-[#ffff] w-12 text-center opacity-80 rounded outline hover:bg-gray-200 cursor-pointer">XL</p>
             <p className="text-xl bg-[#ffff] w-12 text-center opacity-80 rounded outline hover:bg-gray-200 cursor-pointer">XXL</p>
             </div>
-            <p className="text-lg text-justify w-full md:w-[700px] bg-[#FAFAFA] opacity-75 p-7 rounded-xl shadow-inner">Tampil klasik di lapangan dengan jersey retro legendaris AC Milan. 
+            <p className="text-lg text-justify w-full md:w-[700px] bg-[#FAFAFA] p-7 rounded-xl shadow-inner">Tampil klasik di lapangan dengan jersey retro legendaris AC Milan. 
             Desain ikonik Rossoneri dengan sponsor Opel yang akan membawa Anda kembali ke era keemasan sepak bola Italia.</p>
             <h2 className="text-3xl">RP. 799,000.00</h2>
 
