@@ -1,17 +1,22 @@
 'use server'
 import { cookies } from 'next/headers'
 
-export async function createAdminSession(adminId: number) {
-  const cookieStore = await cookies()
-  
-  cookieStore.set('admin-session', adminId.toString(), {
+import { NextResponse } from "next/server";
+
+export function createAdminSession(adminId: number) {
+  const res = NextResponse.json({ success: true });
+
+  res.cookies.set("admin-session", adminId.toString(), {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
     maxAge: 60 * 60 * 24,
-    path: '/', 
-  })
+  });
+
+  return res;
 }
+
 
 export async function deleteAdminSession() {
   const cookieStore = await cookies()
