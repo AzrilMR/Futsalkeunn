@@ -1,20 +1,28 @@
-import {  NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
+import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
-export async function GET(request: Request, { params }: { params:Promise<{ id:string }> }) {
-    try {
-        const { id } = await params
-        const aksesoris = await prisma.aksesoris.findUnique({
-            where: {id_aksesoris: parseInt (id) }
-        })
+export const runtime = "nodejs";
 
-        if (!aksesoris) {
-            return NextResponse.json({ error: 'Aksesoris tidak ditemukan' }, { status:404 })
-        }
+export async function GET(
+  request: Request,
+  context: { params: { id: string } }
+) {
+  const id = Number(context.params.id);
 
-        return NextResponse.json({ success: true, data: aksesoris })
-    } catch (error) {
-        console.error('Detail aksesoris publik error:', error)
-        return NextResponse.json({ error: 'Gagal menampilkan detail aksesoris' })
+  try {
+    const aksesoris = await prisma.aksesoris.findUnique({
+      where: { id_aksesoris: id },
+    });
+
+    if (!aksesoris) {
+      return NextResponse.json({ error: "aksesoris tidak ditemukan" }, { status: 404 });
     }
+
+    return NextResponse.json({ success: true, data: aksesoris });
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Gagal menampilkan detail aksesoris" },
+      { status: 500 }
+    );
+  }
 }

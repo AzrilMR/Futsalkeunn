@@ -1,10 +1,12 @@
 import { NextResponse } from "next/server";
 import { put } from "@vercel/blob";
 
+export const runtime = "nodejs";
+
 export async function POST(req: Request) {
   try {
     const formData = await req.formData();
-    const file = formData.get("file") as File;
+    const file = formData.get("file") as File | null;
 
     if (!file) {
       return NextResponse.json({ error: "File tidak ditemukan" }, { status: 400 });
@@ -17,15 +19,13 @@ export async function POST(req: Request) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    const fileName = `${Date.now()}-${file.name}`;
-
-    const blob = await put(`uploads/${fileName}`, buffer, {
+    const blob = await put(`sepatu-${Date.now()}`, buffer, {
       access: "public",
     });
 
     return NextResponse.json({
       success: true,
-      url: blob.url,
+      fileUrl: blob.url,
     });
 
   } catch (error) {

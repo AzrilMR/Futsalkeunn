@@ -1,49 +1,62 @@
-import { NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
+import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
-export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
+export const runtime = "nodejs";
+
+export async function GET(
+  request: Request,
+  context: { params: { id: string } }
+) {
+  const id = Number(context.params.id);
+
   try {
-    const { id } = await params;
     const aksesoris = await prisma.aksesoris.findUnique({
-      where: { id_aksesoris: Number(id) }
+      where: { id_aksesoris: id },
     });
 
     if (!aksesoris) {
-      return NextResponse.json({ error: 'aksesoris tidak ditemukan' }, { status: 404 });
+      return NextResponse.json({ error: "aksesoris tidak ditemukan" }, { status: 404 });
     }
 
     return NextResponse.json({ success: true, data: aksesoris });
   } catch (error) {
-    return NextResponse.json({ error: 'Gagal mengambil data aksesoris' }, { status: 500 });
+    return NextResponse.json({ error: "Gagal mengambil data" }, { status: 500 });
   }
 }
 
-export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
+export async function PUT(
+  request: Request,
+  context: { params: { id: string } }
+) {
+  const id = Number(context.params.id);
+
   try {
-    const { id } = await params;
     const data = await request.json();
 
-    const aksesoris = await prisma.aksesoris.update({
-      where: { id_aksesoris: Number(id) },
-      data
+    const updated = await prisma.aksesoris.update({
+      where: { id_aksesoris: id },
+      data,
     });
 
-    return NextResponse.json({ success: true, data: aksesoris });
+    return NextResponse.json({ success: true, data: updated });
   } catch (error) {
-    return NextResponse.json({ error: 'Gagal memperbarui data aksesoris' }, { status: 500 });
+    return NextResponse.json({ error: "Gagal update" }, { status: 500 });
   }
 }
 
-export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
-  try {
-    const { id } = await params;
+export async function DELETE(
+  request: Request,
+  context: { params: { id: string } }
+) {
+  const id = Number(context.params.id);
 
+  try {
     await prisma.aksesoris.delete({
-      where: { id_aksesoris: Number(id) }
+      where: { id_aksesoris: id },
     });
 
-    return NextResponse.json({ success: true, message: 'aksesoris berhasil dihapus' });
+    return NextResponse.json({ success: true });
   } catch (error) {
-    return NextResponse.json({ error: 'Gagal menghapus aksesoris' }, { status: 500 });
+    return NextResponse.json({ error: "Gagal hapus" }, { status: 500 });
   }
 }
