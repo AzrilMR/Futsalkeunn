@@ -1,17 +1,14 @@
-import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-
 export const runtime = "nodejs";
 
-export async function GET(
-  request: Request,
-  context: { params: { id: string } }
-) {
-  const id = Number(context.params.id);
+import { NextResponse } from 'next/server';
+import { prisma } from '@/lib/prisma';
 
+export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
+
     const sepatu = await prisma.sepatu.findUnique({
-      where: { id_sepatu: id },
+      where: { id_sepatu: Number(id) }
     });
 
     if (!sepatu) {
@@ -19,44 +16,37 @@ export async function GET(
     }
 
     return NextResponse.json({ success: true, data: sepatu });
-  } catch (error) {
-    return NextResponse.json({ error: "Gagal mengambil data" }, { status: 500 });
+  } catch {
+    return NextResponse.json({ error: "Gagal mengambil data sepatu" }, { status: 500 });
   }
 }
 
-export async function PUT(
-  request: Request,
-  context: { params: { id: string } }
-) {
-  const id = Number(context.params.id);
-
+export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const data = await request.json();
 
-    const updated = await prisma.sepatu.update({
-      where: { id_sepatu: id },
-      data,
+    const sepatu = await prisma.sepatu.update({
+      where: { id_sepatu: Number(id) },
+      data
     });
 
-    return NextResponse.json({ success: true, data: updated });
-  } catch (error) {
-    return NextResponse.json({ error: "Gagal update" }, { status: 500 });
+    return NextResponse.json({ success: true, data: sepatu });
+  } catch {
+    return NextResponse.json({ error: "Gagal update sepatu" }, { status: 500 });
   }
 }
 
-export async function DELETE(
-  request: Request,
-  context: { params: { id: string } }
-) {
-  const id = Number(context.params.id);
-
+export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
+
     await prisma.sepatu.delete({
-      where: { id_sepatu: id },
+      where: { id_sepatu: Number(id) }
     });
 
     return NextResponse.json({ success: true });
-  } catch (error) {
-    return NextResponse.json({ error: "Gagal hapus" }, { status: 500 });
+  } catch {
+    return NextResponse.json({ error: "Gagal hapus sepatu" }, { status: 500 });
   }
 }

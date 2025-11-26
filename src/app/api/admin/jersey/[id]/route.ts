@@ -1,17 +1,14 @@
-import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-
 export const runtime = "nodejs";
 
-export async function GET(
-  request: Request,
-  context: { params: { id: string } }
-) {
-  const id = Number(context.params.id);
+import { NextResponse } from 'next/server';
+import { prisma } from '@/lib/prisma';
 
+export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
+
     const jersey = await prisma.jersey.findUnique({
-      where: { id_jersey: id },
+      where: { id_jersey: Number(id) }
     });
 
     if (!jersey) {
@@ -19,44 +16,37 @@ export async function GET(
     }
 
     return NextResponse.json({ success: true, data: jersey });
-  } catch (error) {
-    return NextResponse.json({ error: "Gagal mengambil data" }, { status: 500 });
+  } catch {
+    return NextResponse.json({ error: "Gagal mengambil data jersey" }, { status: 500 });
   }
 }
 
-export async function PUT(
-  request: Request,
-  context: { params: { id: string } }
-) {
-  const id = Number(context.params.id);
-
+export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const data = await request.json();
 
-    const updated = await prisma.jersey.update({
-      where: { id_jersey: id },
-      data,
+    const jersey = await prisma.jersey.update({
+      where: { id_jersey: Number(id) },
+      data
     });
 
-    return NextResponse.json({ success: true, data: updated });
-  } catch (error) {
-    return NextResponse.json({ error: "Gagal update" }, { status: 500 });
+    return NextResponse.json({ success: true, data: jersey });
+  } catch {
+    return NextResponse.json({ error: "Gagal update jersey" }, { status: 500 });
   }
 }
 
-export async function DELETE(
-  request: Request,
-  context: { params: { id: string } }
-) {
-  const id = Number(context.params.id);
-
+export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
+
     await prisma.jersey.delete({
-      where: { id_jersey: id },
+      where: { id_jersey: Number(id) }
     });
 
     return NextResponse.json({ success: true });
-  } catch (error) {
-    return NextResponse.json({ error: "Gagal hapus" }, { status: 500 });
+  } catch {
+    return NextResponse.json({ error: "Gagal hapus jersey" }, { status: 500 });
   }
 }

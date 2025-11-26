@@ -1,28 +1,22 @@
+export const runtime = "nodejs";
+
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
-export const runtime = "nodejs";
-
-export async function GET(
-  request: Request,
-  context: { params: { id: string } }
-) {
-  const id = Number(context.params.id);
-
+export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const jersey = await prisma.jersey.findUnique({
-      where: { id_jersey: id },
+    const { id } = await params;
+
+    const sepatu = await prisma.sepatu.findUnique({
+      where: { id_sepatu: Number(id) }
     });
 
-    if (!jersey) {
-      return NextResponse.json({ error: "jersey tidak ditemukan" }, { status: 404 });
+    if (!sepatu) {
+      return NextResponse.json({ error: "Sepatu tidak ditemukan" }, { status: 404 });
     }
 
-    return NextResponse.json({ success: true, data: jersey });
-  } catch (error) {
-    return NextResponse.json(
-      { error: "Gagal menampilkan detail jersey" },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: true, data: sepatu });
+  } catch {
+    return NextResponse.json({ error: "Gagal menampilkan detail sepatu" }, { status: 500 });
   }
 }
