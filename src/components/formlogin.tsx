@@ -23,7 +23,7 @@ export default function LoginForm() {
 
       const data = await res.json()
 
-      if (res.ok && data.succes) {
+      if (res.ok && data.success) {
         router.push('/admin/dashboard')
         router.refresh()
       } else {
