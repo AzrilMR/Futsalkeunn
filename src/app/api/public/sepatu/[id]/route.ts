@@ -12,7 +12,7 @@ export async function GET(request: Request, { params }: { params:Promise<{ id:st
             return NextResponse.json({ error: 'Sepatu tidak ditemukan' }, { status:404 })
          }
 
-        return NextResponse.json({ succes: true, data: sepatu })
+        return NextResponse.json({ success: true, data: sepatu })
     } catch (error) {
         console.error('Detail sepatu publik error:', error)
         return NextResponse.json({ error: 'Gagal menampilkan detail sepatu' }, { status: 500 })

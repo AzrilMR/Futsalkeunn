@@ -11,22 +11,24 @@ interface Aksesoris {
 
 }
 
-async function getAksesorisDetail (id: number): Promise<Aksesoris | null> {
-    try {
-        const res = await fetch(`${process.env.NEXTAUTH_URL}/api/public/aksesoris/${id}`, {
-            cache: 'no-store'
-        })
+async function getAksesorisDetail(id: number): Promise<Aksesoris | null> {
+  try {
+    const baseUrl = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
 
-        if (!res.ok) {
-            return null
-        }
+    const res = await fetch(`${baseUrl}/api/public/aksesoris/${id}`, {
+      cache: "no-store",
+    });
 
-        const data = await res.json()
-        return data.data
-    } catch (error) {
-        console.error('Error fetching aksesoris detail', error)
-        return null
-    }
+    if (!res.ok) return null;
+
+    const data = await res.json();
+    return data.data;
+  } catch (error) {
+    console.error("Error fetching aksesoris detail:", error);
+    return null;
+  }
 }
 
 export default async function AksesorisDetailPage({ params }: { params: Promise<{ id:string }> }) {

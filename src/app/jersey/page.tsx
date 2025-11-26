@@ -13,22 +13,26 @@ interface Jersey {
 }
 
 async function getJersey(): Promise<Jersey[]> {
-    try {
-        const res = await fetch(`${process.env.NEXTAUTH_URL}/api/public/jersey`, {
-            cache: 'no-store'
-        })
+  try {
+    const baseUrl = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
 
-        if (!res.ok) {
-            throw new Error('Failed to fetch jersey')
-        }
+    const res = await fetch(`${baseUrl}/api/public/jersey`, {
+      cache: 'no-store'
+    });
 
-        const data = await res.json()
-        return data.data || []
-    } catch (error) {
-        console.error('Error fetching jersey:', error)
-        return []
+    if (!res.ok) {
+      throw new Error('Failed to fetch jersey')
     }
-} 
+
+    const data = await res.json();
+    return data.data || [];
+  } catch (error) {
+    console.error('Error fetching jersey:', error)
+    return []
+  }
+}
 
     export default async function JerseyPage() {
     const jersey = await getJersey()

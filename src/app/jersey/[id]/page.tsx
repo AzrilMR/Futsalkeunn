@@ -12,21 +12,23 @@ interface Jersey {
 }
 
 async function getJerseyDetail(id: number): Promise<Jersey | null> {
-    try {
-        const res = await fetch(`${process.env.NEXTAUTH_URL}/api/public/jersey/${id}`, {
-            cache: 'no-store'
-        })
+  try {
+    const baseUrl = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
 
-        if (!res.ok) {
-            return null
-        }
+    const res = await fetch(`${baseUrl}/api/public/jersey/${id}`, {
+      cache: "no-store",
+    });
 
-        const data = await res.json()
-        return data.data
-    } catch (error) {
-        console.error('Error fetching jersey detail:', error)
-        return null
-    }
+    if (!res.ok) return null;
+
+    const data = await res.json();
+    return data.data;
+  } catch (error) {
+    console.error("Error fetching jersey detail:", error);
+    return null;
+  }
 }
 
 export default async function JerseyDetailPage({ params }: { params: Promise<{ id: string }> }) {

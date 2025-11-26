@@ -12,7 +12,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id:s
             return NextResponse.json({ error: 'Jersey tidak ditemukan' }, { status:404 })
         }
 
-        return NextResponse.json({ succes: true, data: jersey })
+        return NextResponse.json({ success: true, data: jersey })
     } catch (error) {
         console.error('Detail jersey publik error:', error)
         return NextResponse.json({ error: 'Gagal menampilkan detail jersey' }, { status: 500 })

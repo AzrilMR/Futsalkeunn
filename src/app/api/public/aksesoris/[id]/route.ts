@@ -12,7 +12,7 @@ export async function GET(request: Request, { params }: { params:Promise<{ id:st
             return NextResponse.json({ error: 'Aksesoris tidak ditemukan' }, { status:404 })
         }
 
-        return NextResponse.json({ succes: true, data: aksesoris })
+        return NextResponse.json({ success: true, data: aksesoris })
     } catch (error) {
         console.error('Detail aksesoris publik error:', error)
         return NextResponse.json({ error: 'Gagal menampilkan detail aksesoris' })

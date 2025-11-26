@@ -12,21 +12,25 @@ interface Aksesoris {
 }
 
 async function getAksesoris(): Promise<Aksesoris[]> {
-    try {
-        const res = await fetch(`${process.env.NEXTAURH_URL}/api/public/aksesoris`, {
-            cache: 'no-store'
-        })
+  try {
+    const baseUrl = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
 
-        if (!res.ok) {
-            throw new Error('Failed to fetch Aksesoris')
-        }
+    const res = await fetch(`${baseUrl}/api/public/aksesoris`, {
+      cache: 'no-store'
+    });
 
-        const data = await res.json()
-        return data.data || []
-    } catch (error) {
-        console.error('Error fetching aksesoris', error)
-        return []
+    if (!res.ok) {
+      throw new Error('Failed to fetch aksesoris')
     }
+
+    const data = await res.json();
+    return data.data || [];
+  } catch (error) {
+    console.error('Error fetching aksesoris:', error)
+    return []
+  }
 }
 
 export default async function AksesorisPage() {

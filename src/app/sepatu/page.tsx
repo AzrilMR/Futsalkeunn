@@ -14,21 +14,26 @@ interface Sepatu {
 
 async function getSepatu(): Promise<Sepatu[]> {
   try {
-    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/public/sepatu`, {
+    const baseUrl = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
+
+    const res = await fetch(`${baseUrl}/api/public/sepatu`, {
       cache: 'no-store'
-    })
-    
+    });
+
     if (!res.ok) {
       throw new Error('Failed to fetch sepatu')
     }
-    
-    const data = await res.json()
-    return data.data || []
+
+    const data = await res.json();
+    return data.data || [];
   } catch (error) {
     console.error('Error fetching sepatu:', error)
     return []
   }
 }
+
 
 export default async function SepatuPage() {
   const sepatu = await getSepatu()
