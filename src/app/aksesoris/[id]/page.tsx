@@ -16,7 +16,11 @@ interface Aksesoris {
 
 async function getAksesorisDetail(id: number): Promise<Aksesoris | null> {
   try {
-    const res = await fetch(`/api/public/aksesoris/${id}`, {  // ← GANTI INI
+    const baseUrl = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
+
+    const res = await fetch(`${baseUrl}/api/public/aksesoris/${id}`, {
       cache: "no-store",
     });
 
@@ -49,7 +53,7 @@ export default async function AksesorisDetailPage({ params }: { params: Promise<
     return(
         <Layout>
             <div className="flex flex-col md:flex-row md:gap-3">
-                <Link href="/sepatu" className="font-bold p-2">←</Link>
+                <Link href="/aksesoris" className="font-bold p-2">←</Link>
                 <div className="flex justify-center">
                     <div className="bg-[#FAFAFA] m-8 p-5 shadow-lg rounded-xl w-full max-w-[500px] h-auto">
                         {aksesoris.gambar ? (

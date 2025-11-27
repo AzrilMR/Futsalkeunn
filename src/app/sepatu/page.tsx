@@ -15,7 +15,11 @@ interface Sepatu {
 
 async function getSepatu(): Promise<Sepatu[]> {
   try {
-     const res = await fetch(`/api/public/sepatu`, { 
+    const baseUrl = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
+
+    const res = await fetch(`${baseUrl}/api/public/sepatu`, {
       cache: 'no-store'
     });
 

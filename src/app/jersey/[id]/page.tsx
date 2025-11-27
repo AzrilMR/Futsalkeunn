@@ -16,7 +16,11 @@ interface Jersey {
 
 async function getJerseyDetail(id: number): Promise<Jersey | null> {
   try {
-     const res = await fetch(`/api/public/jersey/${id}`, { 
+    const baseUrl = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
+
+    const res = await fetch(`${baseUrl}/api/public/jersey/${id}`, {
       cache: "no-store",
     });
 
@@ -51,7 +55,7 @@ export default async function JerseyDetailPage({ params }: { params: Promise<{ i
     return(
         <Layout>
             <div className="flex flex-col md:flex-row md:gap-3">
-                <Link href="/sepatu" className="font-bold p-2">←</Link>
+                <Link href="/jersey" className="font-bold p-2">←</Link>
                 <div className="flex justify-center">
                     <div className="bg-[#FAFAFA] m-8 p-5 shadow-lg rounded-xl w-full max-w-[500px] h-auto">
                         {jersey.gambar_jersey ? (

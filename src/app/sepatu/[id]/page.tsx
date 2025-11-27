@@ -17,7 +17,11 @@ interface Sepatu {
 
 async function getSepatuDetail(id: number): Promise<Sepatu | null> {
   try {
-    const res = await fetch(`/api/public/sepatu/${id}`, {  
+    const baseUrl = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
+
+    const res = await fetch(`${baseUrl}/api/public/sepatu/${id}`, {
       cache: "no-store",
     });
 

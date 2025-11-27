@@ -16,8 +16,12 @@ interface Jersey {
 
 async function getJersey(): Promise<Jersey[]> {
   try {
-      const res = await fetch(`/api/public/jersey`, { 
-      cache: "no-store",
+    const baseUrl = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
+
+    const res = await fetch(`${baseUrl}/api/public/jersey`, {
+      cache: 'no-store'
     });
 
     if (!res.ok) {
@@ -60,7 +64,7 @@ async function getJersey(): Promise<Jersey[]> {
                     jersey.map((item) => (
                       <Link key={item.id_jersey} href={`/jersey/${item.id_jersey}`}>
                         <div className="m-8 p-5 bg-[#FAFAFA] shadow-lg w-[250] h-[310] rounded-xl hover:bg-gray-200">
-                            <div className="rotate-14 m-5 flex justify-center">
+                            <div className=" m-5 flex justify-center">
                                 {item.gambar_jersey ? (
                                     <Image 
                                     src={item.gambar_jersey}
