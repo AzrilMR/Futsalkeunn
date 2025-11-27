@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Layout from "@/components/layout";
 
+export const dynamic = 'force-dynamic';
+
 interface Jersey {
     id_jersey: number
     nama_jersey: string

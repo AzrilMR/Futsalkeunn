@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Layout from "@/components/layout";
+export const dynamic = 'force-dynamic';
 
 interface Sepatu {
   id_sepatu: number

@@ -3,6 +3,8 @@ import Link from "next/link";
 import Layout from "@/components/layout";
 import { notFound } from 'next/navigation'
 
+export const dynamic = 'force-dynamic';
+
 interface Sepatu {
   id_sepatu: number
   nama_sepatu: string
