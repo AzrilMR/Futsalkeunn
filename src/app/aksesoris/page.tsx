@@ -82,8 +82,8 @@ export default async function AksesorisPage() {
                     ))
                 ) : (
                     <div className="text-center py-12 w-full">
-                        <h3 className="text-xl font-semibold text-gray-600 mb-2">No Jersey Available</h3>
-                        <p className="text-gray-500">Belum ada jersey yang tersedia</p>
+                        <h3 className="text-xl font-semibold text-gray-600 mb-2">No Aksesoris Available</h3>
+                        <p className="text-gray-500">Belum ada Aksesoris yang tersedia</p>
                     </div>
                 )}
             </div>

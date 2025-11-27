@@ -18,7 +18,7 @@ export default function About() {
                                 />
                                 </div>
                     <h2 className="text-xl text-[#204B57] font-bold p-5">Visi Kami</h2>
-                    <p className="p-5">Menyediakan perlengkapan futsal berkualitas dengan harga terjangkau, layanan cepat, dan pengalaman belanja yang mudah bagi semua pecinta futsal.</p>
+                    <p className="p-5">Menampilkan katalog yang dapat membantu anda dalam pemilihan produk kami.</p>
                 </div>
 
                  <div className="w-[400] text-justify mt-2 text-xs bg-[#FAFAFA] shadow-xl rounded-md"> 
@@ -57,7 +57,7 @@ export default function About() {
                                 />
                                 </div>  
                     <h2 className="text-xl mb-2 text-[#204B57] font-bold p-5">Tim & Kontak</h2>
-                    <p className="p-5">Tim kami terdiri dari penggemar futsal dan profesional ritel. Untuk pertanyaan atau kerja sama, hubungi kami di futsalkeun@gmail.com atau lihat lebih lengkap di halaman contact</p>
+                    <p className="p-5">Tim kami terdiri dari penggemar futsal. Untuk pertanyaan atau kerja sama, hubungi kami di futsalkeun@gmail.com atau lihat lebih lengkap di halaman contact</p>
                 </div>
 
                 <div className="w-[400] text-justify mt-2 text-xs bg-[#FAFAFA] shadow-xl rounded-md md:basis-220">
@@ -70,7 +70,7 @@ export default function About() {
                                 />
                                 </div>
                     <h2 className="text-xl text-[#204B57] font-bold p-5">Perjalanan Kami</h2>
-                    <p className="p-5">Bermula dari seorang siswa SMK yang sedang melakukan PKL dia...................</p>
+                    <p className="p-5">Bermula dari seorang siswa SMK yang sedang melakukan PKL dia membuat website ini sebagai projectnya</p>
                 </div>
             </div>
         </div>

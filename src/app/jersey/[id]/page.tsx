@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Layout from "@/components/layout";
 import { notFound } from 'next/navigation'
 
@@ -51,7 +52,8 @@ export default async function JerseyDetailPage({ params }: { params: Promise<{ i
 
     return(
         <Layout>
-            <div className="flex flex-col gap-10 md:flex-row md:gap-5">
+            <div className="flex flex-col md:flex-row md:gap-3">
+                <Link href="/sepatu" className="font-bold p-2">←</Link>
                 <div className="flex justify-center">
                     <div className="bg-[#FAFAFA] m-8 p-5 shadow-lg rounded-xl w-full max-w-[500px] h-auto">
                         {jersey.gambar_jersey ? (
@@ -94,7 +96,7 @@ export default async function JerseyDetailPage({ params }: { params: Promise<{ i
              </p>
            </div>
  
-           <h2 className="text-3xl font-bold text-green-600">
+           <h2 className="text-3xl font-bold">
              {formatCurrency(jersey.harga_jersey)}
            </h2>
  

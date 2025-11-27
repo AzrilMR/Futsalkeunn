@@ -79,7 +79,7 @@ export default async function SepatuPage() {
                   </div>
                   <h3 className="font-semibold mt-4">{item.nama_sepatu}</h3>
                   <p className="text-xs text-gray-600">{item.warna_sepatu}</p>
-                  <p className="text-green-600 font-bold mt-2">
+                  <p className="font-bold mt-2">
                     {formatCurrency(item.harga_sepatu)}
                   </p>
                 </div>
