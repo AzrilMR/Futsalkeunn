@@ -103,58 +103,55 @@ export default function KelolaJersey() {
       }
     }
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-  const file = e.target.files?.[0]
-  if (!file) return
+const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files?.[0];
+  if (!file) return;
 
-  setUploading(true)
-  setMessage('')
+  setUploading(true);
+  setMessage('');
 
   try {
     if (!file.type.startsWith('image/')) {
-      throw new Error('Hanya file gambar yang diizinkan')
+      throw new Error('Hanya file gambar yang diizinkan');
     }
 
     if (file.size > 1 * 1024 * 1024) {
-      throw new Error('Ukuran file maksimal 1MB')
+      throw new Error('Ukuran file maksimal 1MB');
     }
 
-    const uploadFormData = new FormData()
-    uploadFormData.append('file', file)
+    const uploadFormData = new FormData();
+    uploadFormData.append('file', file);
 
     const response = await fetch('/api/admin/upload', {
       method: 'POST',
       body: uploadFormData
-    })
+    });
 
-    if (!response.ok) {
-      throw new Error(`Upload gagal: ${response.status}`)
-    }
+    const result = await response.json();
 
-    const result = await response.json()
-
-    if (result.success && result.fileUrl) {
+    if (result.success && result.url) {    
       setFormData(prev => ({
-        ...prev,                    
-        gambar_jersey: result.fileUrl 
-      }))
-      
-      setMessage('Gambar berhasil diupload')
+        ...prev,
+        gambar_jersey: result.url          
+      }));
+
+      setMessage('Gambar berhasil diupload');
     } else {
-      throw new Error(result.error || 'Upload gambar gagal')
+      throw new Error(result.error || 'Upload gambar gagal');
     }
 
   } catch (error) {
-    console.error('Upload error:', error)
+    console.error('Upload error:', error);
     if (error instanceof Error) {
-      setMessage(error.message || 'Terjadi kesalahan saat upload')
+      setMessage(error.message || 'Terjadi kesalahan saat upload');
     } else {
-      setMessage('Terjadi kesalahan saat upload')
+      setMessage('Terjadi kesalahan saat upload');
     }
   } finally {
-    setUploading(false)
+    setUploading(false);
   }
-}
+};
+
 
   
     const resetForm = () => {

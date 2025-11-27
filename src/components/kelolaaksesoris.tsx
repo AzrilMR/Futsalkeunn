@@ -101,57 +101,54 @@ export default function KelolaAksesoris() {
     }
   }
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file) return
-  
-    setUploading(true)
-    setMessage('')
-  
-    try {
-      if (!file.type.startsWith('image/')) {
-        throw new Error('Hanya file gambar yang diizinkan')
-      }
-  
-      if (file.size > 1 * 1024 * 1024) {
-        throw new Error('Ukuran file maksimal 1MB')
-      }
-  
-      const uploadFormData = new FormData()
-      uploadFormData.append('file', file)
-  
-      const response = await fetch('/api/admin/upload', {
-        method: 'POST',
-        body: uploadFormData
-      })
-  
-      if (!response.ok) {
-        throw new Error(`Upload gagal: ${response.status}`)
-      }
-  
-      const result = await response.json()
-  
-      if (result.success && result.fileUrl) {
-        setFormData(prev => ({
-          ...prev,
-          gambar: result.fileUrl
-        }))
-  
-        setMessage('Gambar berhasil diupload')
-      } else {
-        throw new Error(result.error || 'Upload gambar gagal')
-      }
-  
-    } catch (error) {
-      if (error instanceof Error) {
-        setMessage(error.message || 'Terjadi kesalahan saat upload')
-      } else {
-        setMessage('Terjadi kesalahan saat upload')
-      }
-    } finally {
-      setUploading(false)
+const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files?.[0];
+  if (!file) return;
+
+  setUploading(true);
+  setMessage('');
+
+  try {
+    if (!file.type.startsWith('image/')) {
+      throw new Error('Hanya file gambar yang diizinkan');
     }
+
+    if (file.size > 1 * 1024 * 1024) {
+      throw new Error('Ukuran file maksimal 1MB');
+    }
+
+    const uploadFormData = new FormData();
+    uploadFormData.append('file', file);
+
+    const response = await fetch('/api/admin/upload', {
+      method: 'POST',
+      body: uploadFormData
+    });
+
+    const result = await response.json();
+
+    if (result.success && result.url) {    
+      setFormData(prev => ({
+        ...prev,
+        gambar: result.url          
+      }));
+
+      setMessage('Gambar berhasil diupload');
+    } else {
+      throw new Error(result.error || 'Upload gambar gagal');
+    }
+
+  } catch (error) {
+    console.error('Upload error:', error);
+    if (error instanceof Error) {
+      setMessage(error.message || 'Terjadi kesalahan saat upload');
+    } else {
+      setMessage('Terjadi kesalahan saat upload');
+    }
+  } finally {
+    setUploading(false);
   }
+};
 
   const resetForm = () => {
     setFormData({
