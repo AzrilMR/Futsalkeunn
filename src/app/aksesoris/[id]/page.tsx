@@ -16,11 +16,7 @@ interface Aksesoris {
 
 async function getAksesorisDetail(id: number): Promise<Aksesoris | null> {
   try {
-    const baseUrl = process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : "http://localhost:3000";
-
-    const res = await fetch(`${baseUrl}/api/public/aksesoris/${id}`, {
+    const res = await fetch(`/api/public/aksesoris/${id}`, {  // ← GANTI INI
       cache: "no-store",
     });
 
