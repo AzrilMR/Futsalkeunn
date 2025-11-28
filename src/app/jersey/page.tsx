@@ -16,11 +16,7 @@ interface Jersey {
 
 async function getJersey(): Promise<Jersey[]> {
   try {
-    const baseUrl = process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : "http://localhost:3000";
-
-    const res = await fetch(`${baseUrl}/api/public/jersey`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/public/jersey`, {
       cache: 'no-store'
     });
 
