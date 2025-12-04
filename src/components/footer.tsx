@@ -5,7 +5,7 @@ import Image from 'next/image';
 const Footer = () => {
     return (
          <footer className="bg-[#204B57] text-white mt-20"><hr />
-          <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between">
+          <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col gap-8 md:flex-row justify-between">
             <div className="">
               <h1 className="text-xl mb-3 font-semibold">FUTSALKEUN</h1>
               <p className="text-sm text-justify w-[300]">Tempat terbaik untuk menemukan perlengkapan futsal</p>
@@ -13,9 +13,9 @@ const Footer = () => {
             <div className="mt-4 md:mt-0">
               <h1 className="text-xl font-semibold mb-3">Jelajahi</h1>
               <div className="flex flex-row flex-nowrap gap-3 text-sm  md:flex-col text-center">
-              <Link href="sepatu" className="hover:underline">SEPATU</Link>
-              <Link href="jersey" className="hover:underline">JERSEY</Link>
-              <Link href="aksesoris" className="hover:underline">AKSESORIS</Link>
+              <Link href="/sepatu" className="hover:underline">SEPATU</Link>
+              <Link href="/jersey" className="hover:underline">JERSEY</Link>
+              <Link href="/aksesoris" className="hover:underline">AKSESORIS</Link>
             </div>
             </div>
 

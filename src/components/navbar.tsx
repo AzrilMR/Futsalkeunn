@@ -14,9 +14,9 @@ const Navbar = () => {
           
                     <div className="relative group"><Link href="#">FUTSAL</Link>
                       <div className="absolute hidden group-hover:block group-focus-within:block bg-[#D9D9D9] z-10 text-center text-black rounded">
-                        <div className="hover:bg-gray-400 px-4 py-2"><Link href="sepatu">Sepatu</Link></div>
-                        <div className="hover:bg-gray-400 px-4 py-2"><Link href="jersey">Jersey</Link></div>
-                        <div className="hover:bg-gray-400 px-4 py-2"><Link href="aksesoris">Aksesoris</Link></div>
+                        <div className="hover:bg-gray-400 px-4 py-2"><Link href="/sepatu">Sepatu</Link></div>
+                        <div className="hover:bg-gray-400 px-4 py-2"><Link href="/jersey">Jersey</Link></div>
+                        <div className="hover:bg-gray-400 px-4 py-2"><Link href="/aksesoris">Aksesoris</Link></div>
                       </div>
                     </div>
         
