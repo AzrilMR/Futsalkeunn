@@ -237,7 +237,7 @@ const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         disabled={uploading}
       />
       {uploading && (
-        <p className="text-blue-600 text-sm mt-1">Mengupload gambar...</p>
+        <p className="text-blue-600 text-sm mt-1">Mengunggah gambar...</p>
       )}
     </div>
   </div>
@@ -253,7 +253,7 @@ const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
 
   {formData.gambar_sepatu && (
     <div className="mt-3 mb-4 p-3 bg-green-50 rounded border border-green-200">
-      <p className="text-sm text-green-700 font-medium mb-2">Preview Gambar:</p>
+      <p className="text-sm text-green-700 font-medium mb-2">Pratinjau Gambar:</p>
       <img 
         src={formData.gambar_sepatu}
         alt="Preview Sepatu"
@@ -312,7 +312,7 @@ const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
                     <span className="text-gray-400 text-sm">No image</span>
                   )}
                 </td>
-                <td className="py-2 px-4 border-b">
+                <td className="gap-2 md:py-2 px-4 border-b">
                   <button
                     onClick={() => handleEdit(item)}
                     className="bg-yellow-500 text-white px-2 py-1 rounded mr-2 text-sm hover:bg-yellow-600"

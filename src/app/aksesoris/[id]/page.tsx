@@ -1,17 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import Layout from "@/components/layout";
-import { notFound } from "next/navigation";
+import { notFound } from 'next/navigation'
 
 export const dynamic = 'force-dynamic';
 
 interface Aksesoris {
-    id_aksesoris: number 
+    id_aksesoris: number
     nama_aksesoris: string
     deskripsi_aksesoris: string
     harga_aksesoris: number
     gambar: string
-
 }
 
 async function getAksesorisDetail(id: number): Promise<Aksesoris | null> {
@@ -30,7 +29,7 @@ async function getAksesorisDetail(id: number): Promise<Aksesoris | null> {
   }
 }
 
-export default async function AksesorisDetailPage({ params }: { params: Promise<{ id:string }> }) {
+export default async function AksesorisDetailPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params
     const aksesoris = await getAksesorisDetail(parseInt(id))
 
@@ -46,10 +45,11 @@ export default async function AksesorisDetailPage({ params }: { params: Promise<
         }).format(amount)
     }
 
+
     return(
         <Layout>
             <div className="flex flex-col md:flex-row md:gap-3">
-                <Link href="/aksesoris" className="font-bold p-2">←</Link>
+                <Link href="/aksesoris" className="font-bold p-2 text-2xl">←</Link>
                 <div className="flex justify-center">
                     <div className="bg-[#FAFAFA] m-8 p-5 shadow-lg rounded-xl w-full max-w-[500px] h-auto">
                         {aksesoris.gambar ? (
@@ -70,8 +70,7 @@ export default async function AksesorisDetailPage({ params }: { params: Promise<
 
  <div className="flex flex-col gap-5 mt-10 px-4 md:px-0 md:mt-10">
            <h1 className="text-2xl font-bold md:text-4xl">{aksesoris.nama_aksesoris}</h1>
-           </div>
- 
+
            <div>
              <h2 className="text-xl font-semibold mb-2">DESKRIPSI</h2>
              <p className="text-lg text-justify w-full md:w-[700px] bg-[#FAFAFA] p-7 rounded-xl shadow-inner">
@@ -96,8 +95,9 @@ export default async function AksesorisDetailPage({ params }: { params: Promise<
                </button>
              </a>
            </div>
-         </div>                         
+         </div>               
+
+            </div>
         </Layout>
     )
 }
-    

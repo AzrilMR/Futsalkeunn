@@ -81,8 +81,7 @@ async function getJersey(): Promise<Jersey[]> {
                     ))
                 ) : (
                     <div className="text-center py-12 w-full">
-                        <h3 className="text-xl font-semibold text-gray-600 mb-2">No Jersey Available</h3>
-                        <p className="text-gray-500">Belum ada jersey yang tersedia</p>
+                        <h3 className="text-xl font-semibold text-gray-600 mb-2">Tidak ada jersey yang tersedia</h3>
                     </div>
                 )}
             </div>

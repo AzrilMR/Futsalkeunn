@@ -51,7 +51,7 @@ export default async function JerseyDetailPage({ params }: { params: Promise<{ i
     return(
         <Layout>
             <div className="flex flex-col md:flex-row md:gap-3">
-                <Link href="/jersey" className="font-bold p-2">←</Link>
+                <Link href="/jersey" className="font-bold p-2 text-2xl">←</Link>
                 <div className="flex justify-center">
                     <div className="bg-[#FAFAFA] m-8 p-5 shadow-lg rounded-xl w-full max-w-[500px] h-auto">
                         {jersey.gambar_jersey ? (

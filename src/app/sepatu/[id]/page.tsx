@@ -24,7 +24,7 @@ async function getSepatuDetail(id: number): Promise<Sepatu | null> {
     if (!res.ok) return null;
 
     const data = await res.json();
-    return data.data;
+    return data.data;   
   } catch (error) {
     console.error("Error fetching sepatu detail:", error);
     return null;
@@ -54,7 +54,7 @@ export default async function SepatuDetailPage({ params }: { params: Promise<{ i
   return(
     <Layout>
       <div className="flex flex-col md:flex-row md:gap-3">
-        <Link href="/sepatu" className="font-bold p-2">←</Link>
+        <Link href="/sepatu" className="font-bold p-2 text-2xl">←</Link>
         <div className="flex justify-center">
           <div className="bg-[#FAFAFA] m-8 p-5 shadow-lg rounded-xl w-full max-w-[500px] h-auto">
             {sepatu.gambar_sepatu ? (

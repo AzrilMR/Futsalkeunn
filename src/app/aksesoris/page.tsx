@@ -59,7 +59,7 @@ export default async function AksesorisPage() {
                     aksesoris.map((item) => (
                       <Link key={item.id_aksesoris} href={`/aksesoris/${item.id_aksesoris}`}>
                         <div className="m-8 p-5 bg-[#FAFAFA] shadow-lg w-[250] h-[310] rounded-xl hover:bg-gray-200">
-                            <div className="rotate-14 m-5 flex justify-center">
+                            <div className=" m-5 flex justify-center">
                                 {item.gambar ? (
                                     <Image 
                                     src={item.gambar}
@@ -80,8 +80,7 @@ export default async function AksesorisPage() {
                     ))
                 ) : (
                     <div className="text-center py-12 w-full">
-                        <h3 className="text-xl font-semibold text-gray-600 mb-2">No Aksesoris Available</h3>
-                        <p className="text-gray-500">Belum ada Aksesoris yang tersedia</p>
+                        <h3 className="text-xl font-semibold text-gray-600 mb-2">Tidak ada aksesoris yang tersedia</h3>
                     </div>
                 )}
             </div>

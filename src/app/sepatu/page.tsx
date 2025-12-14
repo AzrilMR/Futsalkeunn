@@ -84,8 +84,7 @@ export default async function SepatuPage() {
             ))
           ) : (
             <div className="text-center py-12 w-full">
-              <h3 className="text-xl font-semibold text-gray-600 mb-2">No Sepatu Available</h3>
-              <p className="text-gray-500">Belum ada sepatu yang tersedia</p>
+              <h3 className="text-xl font-semibold text-gray-600 mb-2">Tidak ada sepatu yang tersedia</h3>
             </div>
           )}
         </div>
