@@ -1,13 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import Layout from "@/components/layout";
+import RotatingCategory from "@/components/rotatingcategory";
 
 export default function Home() {
 
     return(
         <Layout>
         <div>
-            <div className="relative h-120">
+            <div className="relative h-100">
             <Image 
                 src="/home.jpg"
                 alt="Home"              
@@ -15,7 +16,19 @@ export default function Home() {
                 className="object-cover"
             />
             </div>
-            <h1 className="text-4xl font-bold mt-20 px-4">Lihat koleksi perlengkapan futsal dari kami</h1> 
+            <h1 className="text-4xl font-bold mt-5 px-4">Dari Futsal Lovers Bandung, untuk Futsal Lovers Indonesia.</h1>
+            <h2 className="text-2xl mt-5 px-4">Kami memahami apa yang kamu butuhkan untuk bermain lebih baik.</h2>
+
+            <div className="relative h-75 mt-10 mb-10">
+            <Image 
+                src="/jerseyicon.png"
+                alt="Home2"              
+                fill
+                className="object-cover"
+            />
+            </div>
+            
+            <h2 className="text-2xl font-bold mt-8 px-4">Lihat koleksi{" "}<RotatingCategory />{" "}dari kami</h2> 
 
             <div className="flex flex-col gap-5 md:flex-row justify-center items-center mt-20 ">
 
@@ -27,7 +40,7 @@ export default function Home() {
                     height={250}
                 />
                 <Link href="/sepatu">
-                <button className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white hover:bg-white-200 p-3 rounded-full">
+                <button className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white opacity-90 hover:opacity-100 p-3 rounded-full">
                     Lihat sekarang
                 </button>
                 </Link>
@@ -42,7 +55,7 @@ export default function Home() {
                     height={250}
                 />
                 <Link href="/jersey">
-                <button className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white hover:bg-white-200 p-3 rounded-full">
+                <button className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white opacity-90 hover:opacity-100 p-3 rounded-full">
                     Lihat sekarang
                 </button>
                 </Link>
@@ -56,21 +69,12 @@ export default function Home() {
                     height={250}
                 />
                 <Link href="/aksesoris">
-                <button className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white hover:bg-white-200 p-3 rounded-full">
+                <button className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white opacity-90 hover:opacity-100 p-3 rounded-full">
                     Lihat sekarang
                 </button>
                 </Link>
             </div>
             </div>            
-
-             <div className="relative h-90 mt-10 mb-10">
-            <Image 
-                src="/jerseyicon.png"
-                alt="Home2"              
-                fill
-                className="object-cover"
-            />
-            </div>
         </div>
         </Layout>
     );
